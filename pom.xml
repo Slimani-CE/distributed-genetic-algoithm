@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.slimanice.distributedgeneticalgorthm/com.slimanice.distributedgeneticalgorthm.HelloApplication
+                                com.slimanice.distributedgeneticalgorthm/com.slimanice.distributedgeneticalgorthm.GuiApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
