@@ -25,9 +25,19 @@ public class MasterAgent extends GuiAgent{
 
     @Override
     protected void setup() {
+        // Get Gui Controller
+        masterGuiController = (MasterGuiController) getArguments()[0];
+        // Initialize the GUI with the master agent
+        masterGuiController.setMasterAgent(this);
         // Get the number of islands
-        int numberOfIslands = GAUtils.NUMBER_OF_ISLANDS;
-
+        int numberOfIslands = masterGuiController.getNbrIslands();
+        // Get target
+        String target = masterGuiController.getTarget();
+        // Get max iterations
+        int maxIterations = masterGuiController.getMaxGen();
+        // Get population size
+        int populationSize = masterGuiController.getPopulationSize();
+        double mutationRate = masterGuiController.getMutationRate();
         // Register the master agent in the DF
         DFAgentDescription dfd = new DFAgentDescription();
         dfd.setName(getAID());
@@ -50,7 +60,7 @@ public class MasterAgent extends GuiAgent{
                     if (msg.getConversationId().equals("request-parameters")) {
                         // Send parameters to the island agent
                         String type = "parameters";
-                        String parameters = "target=" + GAUtils.TARGET + ";maxIterations=" + GAUtils.MAX_ITERATIONS + ";populationSize=" + GAUtils.POPULATION_SIZE;
+                        String parameters = "target=" + target + ";maxIterations=" + maxIterations + ";populationSize=" + populationSize + ";mutationRate=" + mutationRate;
                         sendMsg(msg.getSender(), type, parameters);
                     }
                     else if (msg.getConversationId().equals("first-fittest")) {
@@ -79,6 +89,8 @@ public class MasterAgent extends GuiAgent{
                 for(Solution solution : solutionList){
                     System.out.println("Island: " + solution.getAid().getLocalName() + "; solution: " + solution.getSolution() + "; fitness: " + solution.getFitness());
                 }
+                // Display results in the GUI
+                masterGuiController.displayResults(solutionList);
             }
 
             private void sendMsg(AID sender, String type, String parameters) {
@@ -94,5 +106,15 @@ public class MasterAgent extends GuiAgent{
     @Override
     protected void onGuiEvent(GuiEvent guiEvent) {
 
+    }
+
+    // Terminate the agent
+    @Override
+    protected void takeDown() {
+        try {
+            DFService.deregister(this);
+        } catch (FIPAException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

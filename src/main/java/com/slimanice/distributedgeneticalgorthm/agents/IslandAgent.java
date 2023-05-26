@@ -30,9 +30,9 @@ public class IslandAgent extends Agent {
                     isMasterAgentFound = true;
                 }
                 else {
-                    System.out.println("Master agent not found. Retrying in 3 seconds...");
+                    System.out.println("Master agent not found. Retrying in 1 seconds...");
                     try {
-                        Thread.sleep(3000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
@@ -75,6 +75,8 @@ public class IslandAgent extends Agent {
         String msgType = "first-fittest";
         String content = population.getFirstFittest().getGenes().toString() + "|" + population.getFirstFittest().getFitness();
         sendMsg(masterAgentAID, msgType, content);
+        // Terminate the island agent
+        doDelete();
     }
 
     private void receiveParameters() {
@@ -103,5 +105,10 @@ public class IslandAgent extends Agent {
         message.setContent(content);
         message.setConversationId(type);
         send(message);
+    }
+
+    @Override
+    protected void takeDown() {
+        System.out.println("Island agent: " + getLocalName() + " is terminating...");
     }
 }

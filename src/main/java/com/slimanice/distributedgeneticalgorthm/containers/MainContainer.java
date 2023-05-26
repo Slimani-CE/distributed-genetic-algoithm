@@ -10,7 +10,7 @@ public class MainContainer {
         Runtime runtime = Runtime.instance();
         ProfileImpl profile = new ProfileImpl();
         profile.setParameter(ProfileImpl.MAIN_HOST, "localhost");
-        profile.setParameter(ProfileImpl.GUI, "true");
+        profile.setParameter(ProfileImpl.GUI, "false");
         AgentContainer mainContainer = runtime.createMainContainer(profile);
         try {
             mainContainer.start();
