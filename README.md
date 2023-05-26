@@ -12,7 +12,7 @@ The distributed genetic algorithm is an algorithmic approach that involves the u
 
 This project is based on a previous project that includes all the details about the genetic algorithm implementation. You can find it [here](https://github.com/Slimani-CE/genetic-algorithm).
 
-![Distributed Genetic Algorithm](assets/Distributed GA.png) [Image Source](https://towardsdatascience.com/parallel-and-distributed-genetic-algorithms-1ed2e76866e3)
+![Distributed Genetic Algorithm](assets/Distributed_GA.png) [Image Source](https://towardsdatascience.com/parallel-and-distributed-genetic-algorithms-1ed2e76866e3)
 
 ## 📁 Project Structure
 ```
